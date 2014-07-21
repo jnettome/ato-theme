@@ -16,8 +16,13 @@
     nav.language-selector {
         margin-left: 25px;
         font-size: 12px;
-        a.current {
-            font-weight: bold;
+
+        ul {
+          list-style: none;
+          li { display: inline-block; }
+          li.current-lang {
+            a { font-weight: bold; }
+          }
         }
     }
 

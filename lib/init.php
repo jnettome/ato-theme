@@ -33,7 +33,7 @@ function roots_setup() {
       ),
       'public' => true,
       'has_archive' => true,
-      'rewrite' => array('slug' => 'works'),
+      'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'custom-fields' )
     )
   );
 

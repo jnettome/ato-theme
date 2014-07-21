@@ -2,9 +2,7 @@
   <div class="row">
     <div class="col-md-3 sidebar text-center" role="navigation">
       <nav class="language-selector">
-        <a href="#" class="current" title="view english page">english</a>
-        /
-        <a href="#" title="ver página em português">português</a>
+        <ul><?php pll_the_languages(); ?></ul>
       </nav>
 
       <h2 class="main-logo">

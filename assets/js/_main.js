@@ -41,7 +41,7 @@ var Roots = {
     }
   },
   // Contact
-  contact: {
+  page_id_10: {
     init: function() {
       var map;
       var brooklyn = new google.maps.LatLng(parseFloat("-25.43659"), parseFloat("-49.282228"));
