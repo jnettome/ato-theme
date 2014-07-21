@@ -39,6 +39,42 @@ var Roots = {
     init: function() {
       // JavaScript to be fired on the about us page
     }
+  },
+  // Contact
+  contact: {
+    init: function() {
+      var map;
+      var brooklyn = new google.maps.LatLng(parseFloat("-25.43659"), parseFloat("-49.282228"));
+
+      var stylez = [
+          {
+            featureType: "all",
+            elementType: "all",
+            stylers: [
+              { saturation: -100 } // <-- THIS
+            ]
+          }
+      ];
+
+      var mapOptions = {
+          zoom: parseInt("16"),
+          center: brooklyn,
+          mapTypeControlOptions: {
+               mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'tehgrayz']
+          }
+      };
+
+      map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+      var mapType = new google.maps.StyledMapType(stylez, { name:"Grayscale" });
+      map.mapTypes.set('tehgrayz', mapType);
+      map.setMapTypeId('tehgrayz');
+      marker = new google.maps.Marker({
+          title : "Alameda Dom Pedro II, 41",
+          position: brooklyn,
+          map: map
+      });
+    }
   }
 };
 

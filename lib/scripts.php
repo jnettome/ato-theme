@@ -8,6 +8,7 @@
  *
  * Enqueue scripts in the following order:
  * 1. jquery-1.11.1.min.js via Google CDN
+ * 1. gMaps API
  * 2. /theme/assets/js/vendor/modernizr.min.js
  * 3. /theme/assets/js/scripts.js (in footer)
  *
@@ -39,6 +40,7 @@ function roots_scripts() {
   }
 
   wp_enqueue_style('myfonts_css', get_template_directory_uri() . '/assets/fonts/myfonts.css', false, null);
+  wp_enqueue_style('fontawesome_css', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css', false, null);
   wp_enqueue_style('roots_css', get_template_directory_uri() . $assets['css'], false, null);
 
   /**
@@ -58,6 +60,7 @@ function roots_scripts() {
 
   wp_enqueue_script('modernizr', get_template_directory_uri() . $assets['modernizr'], array(), null, false);
   wp_enqueue_script('jquery');
+  wp_enqueue_script('gmap', '//maps.googleapis.com/maps/api/js?v=3.exp&#038;sensor=false&ver=1', array(), null, true);
   wp_enqueue_script('roots_js', get_template_directory_uri() . $assets['js'], array(), null, true);
 }
 add_action('wp_enqueue_scripts', 'roots_scripts', 100);
