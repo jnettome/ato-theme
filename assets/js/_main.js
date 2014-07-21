@@ -43,6 +43,28 @@ var Roots = {
   // Contact
   page_id_10: {
     init: function() {
+    }
+  }
+};
+
+// The routing fires all common scripts, followed by the page specific scripts.
+// Add additional events for more control over timing e.g. a finalize event
+var UTIL = {
+  fire: function(func, funcname, args) {
+    var namespace = Roots;
+    funcname = (funcname === undefined) ? 'init' : funcname;
+    if (func !== '' && namespace[func] && typeof namespace[func][funcname] === 'function') {
+      namespace[func][funcname](args);
+    }
+  },
+  loadEvents: function() {
+    UTIL.fire('common');
+
+    $.each(document.body.className.replace(/-/g, '_').split(/\s+/),function(i,classnm) {
+      UTIL.fire(classnm);
+    });
+
+    if($('#map').length > 0) {
       var map;
       var brooklyn = new google.maps.LatLng(parseFloat("-25.43659"), parseFloat("-49.282228"));
 
@@ -75,25 +97,6 @@ var Roots = {
           map: map
       });
     }
-  }
-};
-
-// The routing fires all common scripts, followed by the page specific scripts.
-// Add additional events for more control over timing e.g. a finalize event
-var UTIL = {
-  fire: function(func, funcname, args) {
-    var namespace = Roots;
-    funcname = (funcname === undefined) ? 'init' : funcname;
-    if (func !== '' && namespace[func] && typeof namespace[func][funcname] === 'function') {
-      namespace[func][funcname](args);
-    }
-  },
-  loadEvents: function() {
-    UTIL.fire('common');
-
-    $.each(document.body.className.replace(/-/g, '_').split(/\s+/),function(i,classnm) {
-      UTIL.fire(classnm);
-    });
   }
 };
 

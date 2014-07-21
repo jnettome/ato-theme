@@ -27,13 +27,9 @@ function roots_setup() {
   // Add custom post types
   register_post_type( 'works',
     array(
-      'labels' => array(
-        'name' => __( 'Works' ),
-        'singular_name' => __( 'Work' )
-      ),
       'public' => true,
       'has_archive' => true,
-      'supports' => array( 'title', 'editor', 'author', 'thumbnail', 'custom-fields' )
+      'supports' => array( 'title', 'editor', 'thumbnail', 'custom-fields' )
     )
   );
 
