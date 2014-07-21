@@ -3,6 +3,7 @@
  * Scripts and stylesheets
  *
  * Enqueue stylesheets in the following order:
+ * 1. /theme/assets/fonts/myfonts.css
  * 1. /theme/assets/css/main.css
  *
  * Enqueue scripts in the following order:
@@ -37,6 +38,7 @@ function roots_scripts() {
     );
   }
 
+  wp_enqueue_style('myfonts_css', get_template_directory_uri() . '/assets/fonts/myfonts.css', false, null);
   wp_enqueue_style('roots_css', get_template_directory_uri() . $assets['css'], false, null);
 
   /**
