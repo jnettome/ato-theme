@@ -88,7 +88,7 @@ function roots_theme_activation_options_render_page() { ?>
                 <option selected="selected" value="true"><?php echo _e('Yes', 'roots'); ?></option>
                 <option value="false"><?php echo _e('No', 'roots'); ?></option>
               </select>
-              <p class="description"><?php printf(__('Create the Primary Navigation menu and set the location', 'roots')); ?></p>
+              <p class="description"><?php printf(__('Create the Primary Navigation and Works Navigation menu and set the location', 'roots')); ?></p>
             </fieldset>
           </td>
         </tr>
@@ -174,6 +174,7 @@ function roots_theme_activation_action() {
 
     if (!$primary_nav) {
       $primary_nav_id = wp_create_nav_menu(__('Primary Navigation', 'roots'), array('slug' => 'primary_navigation'));
+      $woks_nav_id = wp_create_nav_menu(__('Works Navigation', 'roots'), array('slug' => 'works_navigation'));
       $roots_nav_theme_mod['primary_navigation'] = $primary_nav_id;
     } else {
       $roots_nav_theme_mod['primary_navigation'] = $primary_nav->term_id;

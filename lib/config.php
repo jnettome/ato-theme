@@ -17,13 +17,7 @@ define('GOOGLE_ANALYTICS_ID', 'UA-19971072-9'); // UA-XXXXX-Y (Note: Universal A
  * .main classes
  */
 function roots_main_class() {
-  if (roots_display_sidebar()) {
-    // Classes on pages with the sidebar
-    $class = 'col-sm-8';
-  } else {
-    // Classes on full width pages
-    $class = 'col-sm-12';
-  }
+  $class = basename(get_permalink());
 
   return apply_filters('roots/main_class', $class);
 }
@@ -54,7 +48,8 @@ function roots_display_sidebar() {
      */
     array(
       'is_404',
-      'is_front_page'
+      'is_front_page',
+      'is_page'
     ),
     /**
      * Page template checks (via is_page_template())

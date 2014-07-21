@@ -19,3 +19,9 @@
     </ul>
   </nav>
 <?php endif; ?>
+
+<!-- <div class="col-md-9 content index2" role="banner">
+    <a href="/lifebeforelife.html" class="cover-picture">
+        <img src="/images/portfolio-1/2.jpg" alt="Life before Life" class="img-responsive">
+    </a>
+</div> -->
