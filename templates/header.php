@@ -16,8 +16,8 @@
       ?>
 
       <ul class="social nav nav-stacked">
-        <li><a href="https://vimeo.com"><i class="fa fa-vimeo-square"></i></a></li>
-        <li><a href="https://facebook.com"><i class="fa fa-facebook-square"></i></a></li>
+        <li><a href="https://vimeo.com/user18229685"><i class="fa fa-vimeo-square"></i></a></li>
+        <li><a href="https://www.facebook.com/pages/Ato1lab-ltda/602578619858541"><i class="fa fa-facebook-square"></i></a></li>
       </ul>
 
       <?php
