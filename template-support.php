@@ -10,72 +10,56 @@ Template Name: Support Template
 
   <?php
     if(function_exists('easy_image_gallery')):
-      $attachment_ids = easy_image_gallery_get_image_ids();
+      $attachment_ids = get_post_meta( $post->ID, '_easy_image_gallery', true );
+      $attachment_ids = array_filter(explode( ',', $attachment_ids ));
 
-  global $post;
+      if ($attachment_ids) {
+        $has_gallery_images = get_post_meta( get_the_ID(), '_easy_image_gallery', true );
+        $has_gallery_images = explode( ',', get_post_meta( get_the_ID(), '_easy_image_gallery', true ) );
 
-  if ( $attachment_ids ) { ?>
+        $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'feature' );
+        $image_title = esc_attr( get_the_title( get_post_thumbnail_id( $post->ID ) ) );
+        ?>
 
-    <?php
+        <div class="row support-images">
+        <?php
+          foreach ( $attachment_ids as $attachment_id ) {
+            $classes = array( '' );
 
-    $has_gallery_images = get_post_meta( get_the_ID(), '_easy_image_gallery', true );
+            // get original image
+            $image_link = wp_get_attachment_image_src( $attachment_id, apply_filters( 'easy_image_gallery_linked_image_size', 'large' ) );
+            $image_link = $image_link[0];
 
-    if ( !$has_gallery_images )
-      return;
+            $image = wp_get_attachment_image( $attachment_id, apply_filters( 'easy_image_gallery_thumbnail_image_size', 'thumbnail' ), '', array( 'alt' => trim( strip_tags( get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ) ), 'class' => '' ) );
 
-    // convert string into array
-    $has_gallery_images = explode( ',', get_post_meta( get_the_ID(), '_easy_image_gallery', true ) );
+            $image_caption = get_post( $attachment_id )->post_excerpt ? get_post( $attachment_id )->post_excerpt : '';
 
-    // clean the array (remove empty values)
-    $has_gallery_images = array_filter( $has_gallery_images );
+            $image_class = esc_attr( implode( ' ', $classes ) );
 
-    $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'feature' );
-    $image_title = esc_attr( get_the_title( get_post_thumbnail_id( $post->ID ) ) );
+            $settings = (array) get_option( 'easy-image-gallery' );
 
-    // css classes array
-    $classes = array();
+            // set fancybox as default for when the settings page hasn't been saved
+            $lightbox = isset( $settings['lightbox'] ) ? esc_attr( $settings['lightbox'] ) : 'prettyphoto';
 
-    // thumbnail count
-    $classes[] = $has_gallery_images ? 'thumbnails-' . easy_image_gallery_count_images() : '';
+            $rel = 'rel="'. $lightbox .'[group]"';
 
-    // linked images
-    $classes[] = easy_image_gallery_has_linked_images() ? 'linked' : '';
+            $image_description = get_post($attachment_id)->post_content ? get_post($attachment_id)->post_content : '' ;
 
-    $classes = implode( ' ', $classes );
-
-    ob_start();
-?>
-
-    <ul class="row list-unstyled <?php echo $classes; ?>">
-    <?php
-    foreach ( $attachment_ids as $attachment_id ) {
-
-      $classes = array( 'popup' );
-
-      // get original image
-      $image_link = wp_get_attachment_image_src( $attachment_id, apply_filters( 'easy_image_gallery_linked_image_size', 'large' ) );
-      $image_link = $image_link[0];
-
-      $image = wp_get_attachment_image( $attachment_id, apply_filters( 'easy_image_gallery_thumbnail_image_size', 'thumbnail' ), '', array( 'alt' => trim( strip_tags( get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ) ), 'class' => 'img-responsive' ) );
-
-      $image_caption = get_post( $attachment_id )->post_excerpt ? get_post( $attachment_id )->post_excerpt : '';
-
-      $image_class = esc_attr( implode( ' ', $classes ) );
-
-      $lightbox = easy_image_gallery_get_lightbox();
-
-      $rel = easy_image_gallery_count_images() > 1 ? 'rel="'. $lightbox .'[group]"' : 'rel="'. $lightbox .'"';
-
-      if ( easy_image_gallery_has_linked_images() )
-        $html = sprintf( '<li><a %s href="%s" class="%s" title="%s"><i class="icon-view"></i><span class="overlay"></span>%s</a></li>', $rel, $image_link, $image_class, $image_caption, $image );
-      else
-        $html = sprintf( '<li class="col-md-3">%s</li>', $image );
+        $html = sprintf( '<a %s href="%s" target="_blank" class="col-xs-6 col-sm-3 %s" title="%s">%s</a>', $rel, $image_description, $image_class, $image_caption, $image );
 
       echo apply_filters( 'easy_image_gallery_html', $html, $rel, $image_link, $image_class, $image_caption, $image, $attachment_id, $post->ID );
     }
 ?>
-    </ul>
+    </div>
     <?php
+  }
     endif;
   ?>
+
 <?php endwhile; ?>
+
+<style>
+  .support-images { display: table-row; margin-top: -60px; }
+  .support-images a { line-height: 170px; text-align: center; display: table-cell; vertical-align: middle; }
+  .support-images a img { vertical-align: middle; }
+</style>
