@@ -61,5 +61,5 @@ Template Name: Support Template
 <style>
   .support-images { display: table-row; margin-top: -60px; }
   .support-images a { line-height: 170px; text-align: center; display: table-cell; vertical-align: middle; }
-  .support-images a img { vertical-align: middle; }
+  .support-images a img { vertical-align: middle; max-width: 100px; height: auto; }
 </style>

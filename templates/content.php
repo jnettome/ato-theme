@@ -18,7 +18,7 @@
         $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'feature' );
         $image_title = esc_attr( get_the_title( get_post_thumbnail_id( $post->ID ) ) );
         ?>
-<hr>
+        <hr class="header-line">
         <div class="row portfolio-images">
         <?php
           foreach ( $attachment_ids as $attachment_id ) {
@@ -53,9 +53,12 @@
   }
     endif;
   ?>
+
     <hr>
 
-    <?php the_content(); ?>
+    <div class="post-text">
+      <?php the_content(); ?>
+    </div>
 
 
 </div>
