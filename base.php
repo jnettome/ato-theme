@@ -11,7 +11,7 @@
     do_action('get_header');
     get_template_part('templates/header');
   ?>
-  <div class="col-md-9 content <?php echo roots_main_class(); ?>" role="main">
+  <div class="col-md-8 col-md-offset-1 content <?php echo roots_main_class(); ?>" role="main">
     <?php include roots_template_path(); ?>
 
     <?php if (roots_display_sidebar()) : ?>
